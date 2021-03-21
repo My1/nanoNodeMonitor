@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // include required files
 require_once __DIR__.'/modules/includes.php';
 
@@ -183,6 +187,10 @@ $data = $cache->fetch($apiName, function () use (
     } else {
         $data->blockSync = null;
     }
+
+    //my1: get frontier count
+    
+    $data->frontierCnt = (int)postCurl($ch, array("action"=>"frontier_count"))->count;
 
     // close curl handle
     curl_close($ch);

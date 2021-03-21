@@ -83,6 +83,7 @@ function updateStats(){
     console.log(response.data);
     response.data.notcem = response.data.currentBlock - response.data.cementedBlocks;
     response.data.totalblocks = response.data.currentBlock + response.data.uncheckedBlocks;
+    response.data.accs = parseInt(response.data.telemetry.account_count);
     document.getElementById("content").innerHTML = template(response.data);
     new ClipboardJS('#copyAccount');
   })

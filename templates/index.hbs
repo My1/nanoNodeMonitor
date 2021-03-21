@@ -25,25 +25,26 @@
 <div class="row">
   <div class="col-lg-4">
     <h3>Node Info</h3>
-    <div class="card mb-4">
-      <ul class="list-group list-group-flush">
+      <ul class="list-group mb-4">
         <li class="list-group-item">
-          <span class="float-left-truncate">Version</span>
-          <span class="float-right-truncate">{{version}}</span>
-        {{#if store_vendor}} <!--Node V21-->
-        <li class="list-group-item">
-          <span class="float-left-truncate">Database</span>
-          <span class="float-right-truncate">{{store_vendor}}</span>
+          <span class="float-left-truncate">Cemented Blocks</span>
+          <span class="float-right-truncate">{{formatNumber cementedBlocks}}</span>
         </li>
-        {{/if}}
+        <li class="list-group-item tot-switch-off">
+          <span class="float-left-truncate">Not Cemented</span>
+          <span class="float-right-truncate">{{formatNumber notcem}}</span>
         </li>
-        <li class="list-group-item">
-          <span class="float-left-truncate">Current Block</span>
-          <span class="float-right-truncate" title="{{formatNumber blockSync}} %">{{formatNumber currentBlock}}</span>
-        </li>
-        <li class="list-group-item">
+        <li class="list-group-item tot-switch-off">
           <span class="float-left-truncate">Unchecked Blocks</span>
           <span class="float-right-truncate">{{formatNumber uncheckedBlocks}}</span>
+        </li>
+        <li class="list-group-item tot-switch-on">
+          <span class="float-left-truncate">Total Checked</span>
+          <span class="float-right-truncate">{{formatNumber currentBlock}}</span>
+        </li>
+        <li class="list-group-item tot-switch-on">
+          <span class="float-left-truncate">All Blocks</span>
+          <span class="float-right-truncate">{{formatNumber totalblocks}}</span>
         </li>
         <li class="list-group-item">
           <span class="float-left-truncate">Peers</span>
@@ -55,15 +56,24 @@
             {{#if blockSync}}
             {{formatNumber blockSync}} %
             {{else}} N/A {{/if}}
-            </span>
+          </span>
         </li>
+        {{#if apiProcTime}}
+        <li class="list-group-item">
+          <span class="float-left-truncate">API Response Time</span>
+          <span class="float-right-truncate">{{formatNumber apiProcTime}} ms</span>
+        </li>
+        {{/if}}
       </ul>
-    </div>
   </div>
 
   <div class="col-lg-4">
-    <h3>Node Account Info</h3>
+    <h3>Representative Info</h3>
     <ul class="list-group mb-4">
+      <li class="list-group-item">
+        <span class="float-left-truncate">Name</span>
+        <span class="float-right-truncate">{{nanoNodeName}}</span>        
+      </li>
       <li class="list-group-item">
         <span class="float-left-truncate">Balance</span>
         <span class="float-right-truncate">{{formatNano accBalanceMnano}} {{currencySymbol}}</span>
@@ -101,13 +111,19 @@
     <h3>System Info</h3>
     <ul class="list-group mb-4">
       <li class="list-group-item">
-        <span class="float-left-truncate">Host</span>
-        <span class="float-right-truncate">{{nanoNodeName}}</span>        
-      </li>
-      <li class="list-group-item">
         <span class="float-left-truncate">Location</span>
         <span class="float-right-truncate">{{nodeLocation}}</span>        
       </li>
+      <li class="list-group-item">
+        <span class="float-left-truncate">Version</span>
+        <span class="float-right-truncate">{{version}}</span>
+      </li>
+      {{#if store_vendor}} <!--Node V21-->
+      <li class="list-group-item">
+        <span class="float-left-truncate">Database</span>
+        <span class="float-right-truncate">{{store_vendor}}</span>
+      </li>
+      {{/if}}
       {{#if nodeUptime}}
       <li class="list-group-item">
         <span class="float-left-truncate">Node Uptime</span>
@@ -115,14 +131,14 @@
       </li>
       {{else if nodeNinja.uptime}}
       <li class="list-group-item">
-        <span class="float-left-truncate">Node Uptime</span>
+        <span class="float-left-truncate">Uptime (via mynano.ninja)</span>
         <span class="float-right-truncate">
           <a href="https://mynano.ninja/account/{{nanoNodeAccount}}">{{formatNumber nodeNinja.uptime}} %</a>
         </span>
       </li>
       {{else}}
       <li class="list-group-item">
-        <span class="float-left-truncate">Node Uptime</span>
+        <span class="float-left-truncate">Node System Uptime</span>
         <span class="float-right-truncate">{{formatSeconds nodeUptimeStartup}}</span>
       </li>
       {{/if}}

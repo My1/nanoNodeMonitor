@@ -1,8 +1,8 @@
 <?php if ($currency == 'nano'): ?>
 
-<img id="monkey" src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=xrb:<?php echo $nanoNodeAccount; ?>&choe=UTF-8" 
+<img id="monkey" src="static/themes/my1/img/qr-code.png" 
 title="QR code for <?php echo $nanoNodeAccount; ?>"
-style="max-width:250px; display:block; margin: 0 0 0 auto;" />
+style="max-width:250px; display:block; margin: 48px 0 0 auto;" />
 
 <?php elseif($currency == 'banano'): ?>
 

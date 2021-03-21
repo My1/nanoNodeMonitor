@@ -1,4 +1,5 @@
 var template;
+var timeouter;
 
 init.push(function(){
   Handlebars.registerHelper('formatNumber', function (number, digits) {
@@ -72,8 +73,16 @@ init.push(function(){
 });
 
 function updateStats(){
+  clearTimeout(timeouter);
+  syncbutton=document.getElementById("syncbutton");
+  if(syncbutton!=null) {
+    syncbutton.classList.add('fa-spin');
+  }
   axios.get('api.php')
   .then(function (response) {
+    console.log(response.data);
+    response.data.notcem = response.data.currentBlock - response.data.cementedBlocks;
+    response.data.totalblocks = response.data.currentBlock + response.data.uncheckedBlocks;
     document.getElementById("content").innerHTML = template(response.data);
     new ClipboardJS('#copyAccount');
   })
@@ -82,6 +91,12 @@ function updateStats(){
     document.getElementById("content").innerHTML = apidata.responseText;
   })
   .finally(function () {
-    setTimeout(updateStats, GLOBAL_REFRESH * 1000);
+    if(GLOBAL_REFRESH>0) {
+      timeouter=setTimeout(updateStats, GLOBAL_REFRESH * 1000);
+    }
   });
+  if(syncbutton!=null) {
+    //syncbutton.classList.remove('fa-spin');
+    setTimeout(function(){syncbutton.classList.remove('fa-spin');}, 1000);
+  }
 }

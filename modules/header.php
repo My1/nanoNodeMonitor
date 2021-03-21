@@ -28,7 +28,7 @@
     </script>
 
     <!--- add the navbar -->
-    <?php include __DIR__ . '/navbar.php'; ?>
+    <?php //include __DIR__ . '/navbar.php'; ?>
 
     <!-- logo and ticker -->
     <div class="container">

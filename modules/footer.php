@@ -37,10 +37,6 @@
          ?>
       </li>
       <li>Powered by <a href="<?php echo PROJECT_URL ?>" target="_blank" rel="noopener">Nano Node Monitor</a></li>
-      <li>GitHub: <a href="<?php echo PROJECT_URL; ?>" target="_blank" rel="noopener">Source</a></li>
-      <li>
-        Donate: <a href="<?php echo getAccountUrl($donAccount, $blockExplorer); ?>" target="_blank" rel="noopener"><?php echo truncateAddress($donAccount); ?></a>
-      </li>
     </ul>
   </small>
 </footer>
